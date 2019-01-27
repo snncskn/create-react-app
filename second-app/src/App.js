@@ -3,12 +3,14 @@ import { Header } from './header';
 import { Content } from './content';
 import { Footer } from './footer';
 import { Table } from './table';
+import PropTypes from 'prop-types';
 
 
 class App extends Component {
 
   constructor() {
     super();
+ 
     this.state = {
       persons: [
         { "id": 4 },
@@ -16,14 +18,30 @@ class App extends Component {
         { "id": 6 }
       ],
       header: "State Header...",
-      footer: "State Footer..."
+      footer: "State Footer...",
+      stateDatas : []
     }
+
+    this.setStateHandler = this.setStateHandler.bind(this);
   }
 
+  setStateHandler() {
+    var ret = document.getElementById('stateInput').value;
+    var myArray = this.state.stateDatas.slice();
+    myArray.push(ret);
+    this.setState({ stateDatas: myArray });
+  }
 
   render() {
     return (
       <div>
+
+        {/* Set State Using...*/}
+        <input type="text" id="stateInput" />
+        <button onClick={this.setStateHandler}>Set State</button>
+        <h4> State Array : {this.state.stateDatas} </h4>
+
+
 
         {/* State*/}
         <h1>{this.state.header}</h1>
@@ -50,15 +68,35 @@ class App extends Component {
           </tbody>
         </table>
 
+        {/* Default Prop */}
+        <h3>{this.props.defaultArray}</h3>
+        <h3>{this.props.defaultNum}</h3>
+        <h3>{this.props.defaultBool}</h3>
+        <h3>{this.props.defaultFonk('SNN')}</h3>
       </div>
     );
   }
 }
 
+/* Prop types */
+App.ProtoTypes = {
+  propTypesHeader: PropTypes.string,
+  defaultArray: PropTypes.array,
+  defaultBool: PropTypes.bool.isRequired,
+  defaultNum: PropTypes.number,
+  defaultFonk: PropTypes.func
+}
 
-{/* Default Prop */ }
+
+/* Default Prop */
 App.defaultProps = {
-  defaultHeaderProp: "Default Header Prop..."
+  defaultHeaderProp: "Default Header Prop...",
+  defaultArray: [1, 2, 3],
+  defaultBool: true,
+  defaultNum: 100,
+  defaultFonk: function (e) {
+    return e;
+  }
 }
 
 export default App;
