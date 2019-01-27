@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
-import Force from './Force';
+//import App from './App';
+import SecondApp from './SecondApp';
 
 
 /* this render for App 
@@ -11,5 +11,5 @@ ReactDOM.render(<App headerProp="Header Prop From index.js..."
 
 
 
-ReactDOM.render(<Force />, document.getElementById('root'));
+ReactDOM.render(<SecondApp />, document.getElementById('root'));
 
